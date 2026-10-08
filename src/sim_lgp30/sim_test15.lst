@@ -1,0 +1,312 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test15.asm                         
+   2 ; tests of simulator halt cause by unini 
+   3 ; the following are tested: b, h, c, a,  
+   4 ; the following opcodes are immune: u, p 
+   5                                          
+   6                                          
+   7 .locn 200                                locn =  200
+   8 ; Cold start - A/ac isuninitialised      
+   9 b   uninitialised   ; should halt        
+  10 ;                                        
+  11 .locn 300                                locn =  300
+  12 b   initialised     ; should succeed     
+  13 ;                                        
+  14 .locn 400                                locn =  400
+  15 ; Cold start - A/ac isuninitialised      
+  16 h   somewhere   ; should halt            
+  17 ;                                        
+  18 .locn 500                                locn =  500
+  19 b   initialised ; should succeed         
+  20 h   somewhere   ; should succeed         
+  21 ;                                        
+  22 .locn 600                                locn =  600
+  23 ; Cold start - A/ac isuninitialised      
+  24 c   somewhere   ; should halt            
+  25 ;                                        
+  26 .locn 700                                locn =  700
+  27 b   initialised ; should succeed         
+  28 c   somewhere   ; should succeed         
+  29 ;                                        
+  30 .locn 800                                locn =  800
+  31 ; Cold start - A/ac isuninitialised      
+  32 a   initialised ; should halt            
+  33 ;                                        
+  34 .locn 900                                locn =  900
+  35 b   initialised ; should succeed         
+  36 a   uninitialised ; should halt          
+  37 ;                                        
+  38 .locn 1000                               locn = 1000
+  39 b   initialised ; should succeed         
+  40 a   initialised ; should succeed         
+  41 ;                                        
+  42 .locn 1100                               locn = 1100
+  43 ; Cold start - A/ac isuninitialised      
+  44 s   initialised ; should halt            
+  45 ;                                        
+  46 .locn 1200                               locn = 1200
+  47 b   initialised     ; should succeed     
+  48 s   uninitialised   ; should halt        
+  49 ;                                        
+  50 .locn 1300                               locn = 1300
+  51 b   initialised ; should succeed         
+  52 s   initialised ; should succeed         
+  53 ;                                        
+  54 .locn 1400                               locn = 1400
+  55 ; Cold start    - A/ac isuninitialised   
+  56 m   initialised ; should halt            
+  57 ;                                        
+  58 .locn 1500                               locn = 1500
+  59 b   initialised ; should succeed         
+  60 m   uninitialised ; should halt          
+  61 ;                                        
+  62 .locn 1600                               locn = 1600
+  63 b   initialised ; should succeed         
+  64 m   initialised ; should succeed         
+  65 ;                                        
+  66 .locn 1700                               locn = 1700
+  67 ; Cold start - A/ac isuninitialised      
+  68 n   initialised ; should halt            
+  69 ;                                        
+  70 .locn 1800                               locn = 1800
+  71 b   initialised ; should succeed         
+  72 n   uninitialised ; should halt          
+  73 ;                                        
+  74 .locn 1900                               locn = 1900
+  75 b   initialised ; should succeed         
+  76 n   initialised ; should succeed         
+  77 ;                                        
+  78 .locn 2000                               locn = 2000
+  79 ; Cold start - A/ac isuninitialised      
+  80 d   initialised ; should halt            
+  81 ;                                        
+  82 .locn 2100                               locn = 2100
+  83 b   initialised     ; should succeed     
+  84 d   uninitialised   ; should halt        
+  85 ;                                        
+  86 .locn 2200                               locn = 2200
+  87 b   initialised ; should succeed         
+  88 d   initialised ; should succeed (actual 
+  89 ;                                        
+  90 .locn 2300                               locn = 2300
+  91 ; Cold start - A/ac isuninitialised      
+  92 e   initialised ; should halt            
+  93 ;                                        
+  94 .locn 2400                               locn = 2400
+  95 b   initialised     ; should succeed     
+  96 e   uninitialised   ; should halt        
+  97 ;                                        
+  98 .locn 2500                               locn = 2500
+  99 b   initialised ; should succeed         
+ 100 e   initialised ; should succeed         
+ 101 ;                                        
+ 102 .locn 2600                               locn = 2600
+ 103 ; Cold start - A/ac isuninitialised      
+ 104 y   initialised ; should halt            
+ 105 ;                                        
+ 106 .locn 2700                               locn = 2700
+ 107 b   initialised     ; should succeed     
+ 108 y   uninitialised   ; should halt        
+ 109 ;                                        
+ 110 .locn 2800                               locn = 2800
+ 111 b   initialised ; should succeed         
+ 112 y   initialised ; should succeed         
+ 113 ;                                        
+ 114 .locn 2900                               locn = 2900
+ 115 ; Cold start - A/ac isuninitialised      
+ 116 t   next    ; should halt                
+ 117 ;                                        
+ 118 .locn 3000                               locn = 3000
+ 119 b   initialised ; should succeed         
+ 120 t   next        ; should succeed         
+ 121 next:                                    
+ 122 ;                                        
+ 123 .locn 3100                               locn = 3100
+ 124 r   uninitialised   ; should halt        
+ 125 ;                                        
+ 126 .locn 3200                               locn = 3200
+ 127 r   initialised     ; should succeed     
+ 128 ;                                        
+ 129 .locn 3300                               locn = 3300
+ 130 ; Cold start - A/ac isuninitialised      
+ 131 p   0                                    
+ 132 i   0   ; should halt on receipt of firs 
+ 133 ;                                        
+ 134 .locn 3400                               locn = 3400
+ 135 b   initialised ; should succeed         
+ 136 p   0           ; should succeed         
+ 137 i   0           ; should succeed on rece 
+ 138 ;                                        
+ 139 .locn 4000                               locn = 4000
+ 140 initialised:    .atq 1 6                 
+ 141 .locn 4001                               locn = 4001
+ 142 uninitialised:  ; not initialised        
+ 143 .locn 4002                               locn = 4002
+ 144 somewhere:      ; not initialised        
+ 145                                          
+
+Symbol Table:
+------ ------
+next         :         3002
+initialised  :         4000
+uninitialised :         4001
+somewhere    :         4002
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test15.asm                         
+   2 ; tests of simulator halt cause by unini 
+   3 ; the following are tested: b, h, c, a,  
+   4 ; the following opcodes are immune: u, p 
+   5                                          
+   6                                          
+   7 .locn 200                                locn =  200
+   8 ; Cold start - A/ac isuninitialised      
+   9 b   uninitialised   ; should halt         200 b      4001 62 33        81540 0001 3q84 0001 3e84
+  10 ;                                        
+  11 .locn 300                                locn =  300
+  12 b   initialised     ; should succeed      300 b      4000 62 32        81536 0001 3q80 0001 3e80
+  13 ;                                        
+  14 .locn 400                                locn =  400
+  15 ; Cold start - A/ac isuninitialised      
+  16 h   somewhere   ; should halt             400 h      4002 62 34       802440 000j 3q88 000c 3e88
+  17 ;                                        
+  18 .locn 500                                locn =  500
+  19 b   initialised ; should succeed          500 b      4000 62 32        81536 0001 3q80 0001 3e80
+  20 h   somewhere   ; should succeed          501 h      4002 62 34       802440 000j 3q88 000c 3e88
+  21 ;                                        
+  22 .locn 600                                locn =  600
+  23 ; Cold start - A/ac isuninitialised      
+  24 c   somewhere   ; should halt             600 c      4002 62 34       867976 000k 3q88 000d 3e88
+  25 ;                                        
+  26 .locn 700                                locn =  700
+  27 b   initialised ; should succeed          700 b      4000 62 32        81536 0001 3q80 0001 3e80
+  28 c   somewhere   ; should succeed          701 c      4002 62 34       867976 000k 3q88 000d 3e88
+  29 ;                                        
+  30 .locn 800                                locn =  800
+  31 ; Cold start - A/ac isuninitialised      
+  32 a   initialised ; should halt             800 a      4000 62 32       933504 000q 3q80 000e 3e80
+  33 ;                                        
+  34 .locn 900                                locn =  900
+  35 b   initialised ; should succeed          900 b      4000 62 32        81536 0001 3q80 0001 3e80
+  36 a   uninitialised ; should halt           901 a      4001 62 33       933508 000q 3q84 000e 3e84
+  37 ;                                        
+  38 .locn 1000                               locn = 1000
+  39 b   initialised ; should succeed         1000 b      4000 62 32        81536 0001 3q80 0001 3e80
+  40 a   initialised ; should succeed         1001 a      4000 62 32       933504 000q 3q80 000e 3e80
+  41 ;                                        
+  42 .locn 1100                               locn = 1100
+  43 ; Cold start - A/ac isuninitialised      
+  44 s   initialised ; should halt            1100 s      4000 62 32       999040 000w 3q80 000f 3e80
+  45 ;                                        
+  46 .locn 1200                               locn = 1200
+  47 b   initialised     ; should succeed     1200 b      4000 62 32        81536 0001 3q80 0001 3e80
+  48 s   uninitialised   ; should halt        1201 s      4001 62 33       999044 000w 3q84 000f 3e84
+  49 ;                                        
+  50 .locn 1300                               locn = 1300
+  51 b   initialised ; should succeed         1300 b      4000 62 32        81536 0001 3q80 0001 3e80
+  52 s   initialised ; should succeed         1301 s      4000 62 32       999040 000w 3q80 000f 3e80
+  53 ;                                        
+  54 .locn 1400                               locn = 1400
+  55 ; Cold start    - A/ac isuninitialised   
+  56 m   initialised ; should halt            1400 m      4000 62 32       474752 0007 3q80 0007 3e80
+  57 ;                                        
+  58 .locn 1500                               locn = 1500
+  59 b   initialised ; should succeed         1500 b      4000 62 32        81536 0001 3q80 0001 3e80
+  60 m   uninitialised ; should halt          1501 m      4001 62 33       474756 0007 3q84 0007 3e84
+  61 ;                                        
+  62 .locn 1600                               locn = 1600
+  63 b   initialised ; should succeed         1600 b      4000 62 32        81536 0001 3q80 0001 3e80
+  64 m   initialised ; should succeed         1601 m      4000 62 32       474752 0007 3q80 0007 3e80
+  65 ;                                        
+  66 .locn 1700                               locn = 1700
+  67 ; Cold start - A/ac isuninitialised      
+  68 n   initialised ; should halt            1700 n      4000 62 32       409216 0006 3q80 0006 3e80
+  69 ;                                        
+  70 .locn 1800                               locn = 1800
+  71 b   initialised ; should succeed         1800 b      4000 62 32        81536 0001 3q80 0001 3e80
+  72 n   uninitialised ; should halt          1801 n      4001 62 33       409220 0006 3q84 0006 3e84
+  73 ;                                        
+  74 .locn 1900                               locn = 1900
+  75 b   initialised ; should succeed         1900 b      4000 62 32        81536 0001 3q80 0001 3e80
+  76 n   initialised ; should succeed         1901 n      4000 62 32       409216 0006 3q80 0006 3e80
+  77 ;                                        
+  78 .locn 2000                               locn = 2000
+  79 ; Cold start - A/ac isuninitialised      
+  80 d   initialised ; should halt            2000 d      4000 62 32       343680 0005 3q80 0005 3e80
+  81 ;                                        
+  82 .locn 2100                               locn = 2100
+  83 b   initialised     ; should succeed     2100 b      4000 62 32        81536 0001 3q80 0001 3e80
+  84 d   uninitialised   ; should halt        2101 d      4001 62 33       343684 0005 3q84 0005 3e84
+  85 ;                                        
+  86 .locn 2200                               locn = 2200
+  87 b   initialised ; should succeed         2200 b      4000 62 32        81536 0001 3q80 0001 3e80
+  88 d   initialised ; should succeed (actual 2201 d      4000 62 32       343680 0005 3q80 0005 3e80
+  89 ;                                        
+  90 .locn 2300                               locn = 2300
+  91 ; Cold start - A/ac isuninitialised      
+  92 e   initialised ; should halt            2300 e      4000 62 32       605824 0009 3q80 0009 3e80
+  93 ;                                        
+  94 .locn 2400                               locn = 2400
+  95 b   initialised     ; should succeed     2400 b      4000 62 32        81536 0001 3q80 0001 3e80
+  96 e   uninitialised   ; should halt        2401 e      4001 62 33       605828 0009 3q84 0009 3e84
+  97 ;                                        
+  98 .locn 2500                               locn = 2500
+  99 b   initialised ; should succeed         2500 b      4000 62 32        81536 0001 3q80 0001 3e80
+ 100 e   initialised ; should succeed         2501 e      4000 62 32       605824 0009 3q80 0009 3e80
+ 101 ;                                        
+ 102 .locn 2600                               locn = 2600
+ 103 ; Cold start - A/ac isuninitialised      
+ 104 y   initialised ; should halt            2600 y      4000 62 32       147072 0002 3q80 0002 3e80
+ 105 ;                                        
+ 106 .locn 2700                               locn = 2700
+ 107 b   initialised     ; should succeed     2700 b      4000 62 32        81536 0001 3q80 0001 3e80
+ 108 y   uninitialised   ; should halt        2701 y      4001 62 33       147076 0002 3q84 0002 3e84
+ 109 ;                                        
+ 110 .locn 2800                               locn = 2800
+ 111 b   initialised ; should succeed         2800 b      4000 62 32        81536 0001 3q80 0001 3e80
+ 112 y   initialised ; should succeed         2801 y      4000 62 32       147072 0002 3q80 0002 3e80
+ 113 ;                                        
+ 114 .locn 2900                               locn = 2900
+ 115 ; Cold start - A/ac isuninitialised      
+ 116 t   next    ; should halt                2900 t      3002 46 58       732904 000g 2qq8 000b 2ee8
+ 117 ;                                        
+ 118 .locn 3000                               locn = 3000
+ 119 b   initialised ; should succeed         3000 b      4000 62 32        81536 0001 3q80 0001 3e80
+ 120 t   next        ; should succeed         3001 t      3002 46 58       732904 000g 2qq8 000b 2ee8
+ 121 next:                                    
+ 122 ;                                        
+ 123 .locn 3100                               locn = 3100
+ 124 r   uninitialised   ; should halt        3100 r      4001 62 33       212612 0003 3q84 0003 3e84
+ 125 ;                                        
+ 126 .locn 3200                               locn = 3200
+ 127 r   initialised     ; should succeed     3200 r      4000 62 32       212608 0003 3q80 0003 3e80
+ 128 ;                                        
+ 129 .locn 3300                               locn = 3300
+ 130 ; Cold start - A/ac isuninitialised      
+ 131 p   0                                    3300 p         0  0  0       524288 0008 0000 0008 0000
+ 132 i   0   ; should halt on receipt of firs 3301 i         0  0  0       262144 0004 0000 0004 0000
+ 133 ;                                        
+ 134 .locn 3400                               locn = 3400
+ 135 b   initialised ; should succeed         3400 b      4000 62 32        81536 0001 3q80 0001 3e80
+ 136 p   0           ; should succeed         3401 p         0  0  0       524288 0008 0000 0008 0000
+ 137 i   0           ; should succeed on rece 3402 i         0  0  0       262144 0004 0000 0004 0000
+ 138 ;                                        
+ 139 .locn 4000                               locn = 4000
+ 140 initialised:    .atq 1 6                 4000                       33554432 0200 0000 0200 0000
+ 141 .locn 4001                               locn = 4001
+ 142 uninitialised:  ; not initialised        
+ 143 .locn 4002                               locn = 4002
+ 144 somewhere:      ; not initialised        
+ 145                                          
+
+Symbol Table:
+------ ------
+next         :         3002
+initialised  :         4000
+uninitialised :         4001
+somewhere    :         4002

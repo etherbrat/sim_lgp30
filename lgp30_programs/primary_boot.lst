@@ -1,0 +1,50 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 .locn 4032      ; (Track 63, Sector 00)  locn = 4032
+   2 ;                                        
+   3 start:                                   
+   4     p   0       ; start reader           
+   5     i   0       ; get a word             
+   6     c   exec    ; word goes to memory, c 
+   7     p   0       ; start reader           
+   8     i   0       ; get a word             
+   9 ;                                        
+  10 exec:                                    
+  11     .word 0     ; word goes here for exe 
+  12 ;                                        
+  13 ; loop instruction loads here            
+  14 ; secondary boot loads next              
+  15 ;                                        
+  16 .end start                               
+
+Symbol Table:
+------ ------
+start        :         4032
+exec         :         4037
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 .locn 4032      ; (Track 63, Sector 00)  locn = 4032
+   2 ;                                        
+   3 start:                                   
+   4     p   0       ; start reader           4032 p         0  0  0       524288 0008 0000 0008 0000
+   5     i   0       ; get a word             4033 i         0  0  0       262144 0004 0000 0004 0000
+   6     c   exec    ; word goes to memory, c 4034 c      4037 63  5       868116 000k 3w14 000d 3f14
+   7     p   0       ; start reader           4035 p         0  0  0       524288 0008 0000 0008 0000
+   8     i   0       ; get a word             4036 i         0  0  0       262144 0004 0000 0004 0000
+   9 ;                                        
+  10 exec:                                    
+  11     .word 0     ; word goes here for exe 4037                              0 0000 0000 0000 0000
+  12 ;                                        
+  13 ; loop instruction loads here            
+  14 ; secondary boot loads next              
+  15 ;                                        
+  16 .end start                               Start: 4032
+
+Symbol Table:
+------ ------
+start        :         4032
+exec         :         4037

@@ -1,0 +1,116 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test1.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; b, h, c, e, y, r, u, t, z              
+   4 start:                                   
+   5 b word1                                  
+   6 c word3                                  
+   7 b word2                                  
+   8 h word4                                  
+   9 b word5                                  
+  10 e word7                                  
+  11 b word6                                  
+  12 e word7                                  
+  13 b word8                                  
+  14 y word9                                  
+  15 z 0                                      
+  16 .locn 1000                               locn = 1000
+  17 word1:                                   
+  18 .word 0x10101010 ; operand for b instruc 
+  19 .locn 1100                               locn = 1100
+  20 word2:                                   
+  21 .word 0xfffffffe ; operand for b instruc 
+  22 .locn 1200                               locn = 1200
+  23 word3:                                   
+  24 .word 0 ; target for c  instruction      
+  25 .locn 1300                               locn = 1300
+  26 word4:                                   
+  27 .word 0 ; target for h instruction       
+  28 .locn 1400                               locn = 1400
+  29 word5:                                   
+  30 .word 0xf0f0f0f0 ; A/ac for e instructio 
+  31 word6:                                   
+  32 .word 0x0f0f0f0f ; A/ac for e instructio 
+  33 word7:                                   
+  34 .word 0x12481248 ; mask for e instructio 
+  35 .locn 1500                               locn = 1500
+  36 word8:                                   
+  37 b 1234 ; source of address for y instruc 
+  38 .locn 1600                               locn = 1600
+  39 word9:                                   
+  40 b 0 ; target of y instruction            
+  41 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+word1        :         1000
+word2        :         1100
+word3        :         1200
+word4        :         1300
+word5        :         1400
+word6        :         1401
+word7        :         1402
+word8        :         1500
+word9        :         1600
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test1.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; b, h, c, e, y, r, u, t, z              
+   4 start:                                   
+   5 b word1                                     0 b      1000 15 40        69536 0001 0wf0 0001 0fa0
+   6 c word3                                     1 c      1200 18 48       856768 000k 12j0 000d 12c0
+   7 b word2                                     2 b      1100 17 12        69936 0001 1130 0001 1130
+   8 h word4                                     3 h      1300 20 20       791632 000j 1450 000c 1450
+   9 b word5                                     4 b      1400 21 56        71136 0001 15q0 0001 15e0
+  10 e word7                                     5 e      1402 21 58       595432 0009 15q8 0009 15e8
+  11 b word6                                     6 b      1401 21 57        71140 0001 15q4 0001 15e4
+  12 e word7                                     7 e      1402 21 58       595432 0009 15q8 0009 15e8
+  13 b word8                                     8 b      1500 23 28        71536 0001 1770 0001 1770
+  14 y word9                                     9 y      1600 25  0       137472 0002 1900 0002 1900
+  15 z 0                                        10 z         0  0  0            0 0000 0000 0000 0000
+  16 .locn 1000                               locn = 1000
+  17 word1:                                   
+  18 .word 0x10101010 ; operand for b instruc 1000                      269488144 1010 1010 1010 1010
+  19 .locn 1100                               locn = 1100
+  20 word2:                                   
+  21 .word 0xfffffffe ; operand for b instruc 1100                     4294967294 wwww wwwq ffff fffe
+  22 .locn 1200                               locn = 1200
+  23 word3:                                   
+  24 .word 0 ; target for c  instruction      1200                              0 0000 0000 0000 0000
+  25 .locn 1300                               locn = 1300
+  26 word4:                                   
+  27 .word 0 ; target for h instruction       1300                              0 0000 0000 0000 0000
+  28 .locn 1400                               locn = 1400
+  29 word5:                                   
+  30 .word 0xf0f0f0f0 ; A/ac for e instructio 1400                     4042322160 w0w0 w0w0 f0f0 f0f0
+  31 word6:                                   
+  32 .word 0x0f0f0f0f ; A/ac for e instructio 1401                      252645134 0w0w 0w0q 0f0f 0f0e
+  33 word7:                                   
+  34 .word 0x12481248 ; mask for e instructio 1402                      306713160 1248 1248 1248 1248
+  35 .locn 1500                               locn = 1500
+  36 word8:                                   
+  37 b 1234 ; source of address for y instruc 1500 b      1234 19 18        70472 0001 1348 0001 1348
+  38 .locn 1600                               locn = 1600
+  39 word9:                                   
+  40 b 0 ; target of y instruction            1600 b         0  0  0        65536 0001 0000 0001 0000
+  41 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+word1        :         1000
+word2        :         1100
+word3        :         1200
+word4        :         1300
+word5        :         1400
+word6        :         1401
+word7        :         1402
+word8        :         1500
+word9        :         1600

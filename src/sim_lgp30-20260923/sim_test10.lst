@@ -1,0 +1,54 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test10.asm                         
+   2 ; non-exhaustive tests of None operand a 
+   3 .locn 1200 ; any old start address       locn = 1200
+   4     a   number          ; None A/ac + op 
+   5                                          
+   6 .locn 1210 ; another start address       locn = 1210
+   7     b   number                           
+   8     a   number+1        ; A/ac + None op 
+   9                                          
+  10 .locn 1220                               locn = 1220
+  11     b number                             
+  12     d CONST_0                            
+  13                                          
+  14 CONST_0: .word 0        ; zero           
+  15                                          
+  16 number: .atq 1234 11    ; any old number 
+  17                                          
+  18 .end 0                                   
+
+Symbol Table:
+------ ------
+CONST_0      :         1222
+number       :         1223
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test10.asm                         
+   2 ; non-exhaustive tests of None operand a 
+   3 .locn 1200 ; any old start address       locn = 1200
+   4     a   number          ; None A/ac + op 1200 a      1223 19  7       922396 000q 131j 000e 131c
+   5                                          
+   6 .locn 1210 ; another start address       locn = 1210
+   7     b   number                           1210 b      1223 19  7        70428 0001 131j 0001 131c
+   8     a   number+1        ; A/ac + None op 1211 a      1224 19  8       922400 000q 1320 000e 1320
+   9                                          
+  10 .locn 1220                               locn = 1220
+  11     b number                             1220 b      1223 19  7        70428 0001 131j 0001 131c
+  12     d CONST_0                            1221 d      1222 19  6       332568 0005 1318 0005 1318
+  13                                          
+  14 CONST_0: .word 0        ; zero           1222                              0 0000 0000 0000 0000
+  15                                          
+  16 number: .atq 1234 11    ; any old number 1223                     1293942784 4k20 0000 4d20 0000
+  17                                          
+  18 .end 0                                   Start: 0
+
+Symbol Table:
+------ ------
+CONST_0      :         1222
+number       :         1223

@@ -1,0 +1,110 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test16.py                          
+   2 ; tests of the t instruction with and wi 
+   3 ;                                        
+   4 ; with tcs on or off                     
+   5 .locn 111           ; any old start addr locn =  111
+   6 start:                                   
+   7 b zero              ; A <- 0             
+   8 t addr1             ; should not branch  
+   9 b sign_set          ; A <- sign set      
+  10 t addr1             ; should branch      
+  11 z 0                 ; should be skipped  
+  12 ;                                        
+  13 addr1:              ; should continue he 
+  14 ; with tcs on                            
+  15 b test_instr2       ; a <- test_instr    
+  16 h exec1             ; store for executio 
+  17 b zero              ; a <-0              
+  18 exec1:                                   
+  19 .word 0             ; execute test - sho 
+  20 b test_instr2       ; a <- test instruct 
+  21 a sign_set          ; set the sign bit   
+  22 h exec2             ; store for executio 
+  23 b 0                 ; a <- 0 (should not 
+  24 exec2:                                   
+  25 .word 0             ; execute test - sho 
+  26 z 60                ; should be skipped  
+  27 addr2:                                   
+  28 z 60                ; should stop here w 
+  29 ;                                        
+  30 .locn 3142                               locn = 3142
+  31 test_instr1:                             
+  32 t addr1             ; test instruction,  
+  33 test_instr2:                             
+  34 t addr2             ; test instruction,  
+  35 zero:                                    
+  36 .word 0             ; zero               
+  37 sign_set:                                
+  38 .word 0x80000000    ; sign bit set       
+  39 .end start                               
+
+Symbol Table:
+------ ------
+start        :          111
+addr1        :          116
+exec1        :          119
+exec2        :          124
+addr2        :          126
+test_instr1  :         3142
+test_instr2  :         3143
+zero         :         3144
+sign_set     :         3145
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test16.py                          
+   2 ; tests of the t instruction with and wi 
+   3 ;                                        
+   4 ; with tcs on or off                     
+   5 .locn 111           ; any old start addr locn =  111
+   6 start:                                   
+   7 b zero              ; A <- 0              111 b      3144 49  8        78112 0001 3120 0001 3120
+   8 t addr1             ; should not branch   112 t       116  1 52       721360 000g 01k0 000b 01d0
+   9 b sign_set          ; A <- sign set       113 b      3145 49  9        78116 0001 3124 0001 3124
+  10 t addr1             ; should branch       114 t       116  1 52       721360 000g 01k0 000b 01d0
+  11 z 0                 ; should be skipped   115 z         0  0  0            0 0000 0000 0000 0000
+  12 ;                                        
+  13 addr1:              ; should continue he 
+  14 ; with tcs on                            
+  15 b test_instr2       ; a <- test_instr     116 b      3143 49  7        78108 0001 311j 0001 311c
+  16 h exec1             ; store for executio  117 h       119  1 55       786908 000j 01kj 000c 01dc
+  17 b zero              ; a <-0               118 b      3144 49  8        78112 0001 3120 0001 3120
+  18 exec1:                                   
+  19 .word 0             ; execute test - sho  119                              0 0000 0000 0000 0000
+  20 b test_instr2       ; a <- test instruct  120 b      3143 49  7        78108 0001 311j 0001 311c
+  21 a sign_set          ; set the sign bit    121 a      3145 49  9       930084 000q 3124 000e 3124
+  22 h exec2             ; store for executio  122 h       124  1 60       786928 000j 01w0 000c 01f0
+  23 b 0                 ; a <- 0 (should not  123 b         0  0  0        65536 0001 0000 0001 0000
+  24 exec2:                                   
+  25 .word 0             ; execute test - sho  124                              0 0000 0000 0000 0000
+  26 z 60                ; should be skipped   125 z      3840 60  0        15360 0000 3j00 0000 3c00
+  27 addr2:                                   
+  28 z 60                ; should stop here w  126 z      3840 60  0        15360 0000 3j00 0000 3c00
+  29 ;                                        
+  30 .locn 3142                               locn = 3142
+  31 test_instr1:                             
+  32 t addr1             ; test instruction,  3142 t       116  1 52       721360 000g 01k0 000b 01d0
+  33 test_instr2:                             
+  34 t addr2             ; test instruction,  3143 t       126  1 62       721400 000g 01w8 000b 01f8
+  35 zero:                                    
+  36 .word 0             ; zero               3144                              0 0000 0000 0000 0000
+  37 sign_set:                                
+  38 .word 0x80000000    ; sign bit set       3145                     2147483648 8000 0000 8000 0000
+  39 .end start                               Start: 111
+
+Symbol Table:
+------ ------
+start        :          111
+addr1        :          116
+exec1        :          119
+exec2        :          124
+addr2        :          126
+test_instr1  :         3142
+test_instr2  :         3143
+zero         :         3144
+sign_set     :         3145

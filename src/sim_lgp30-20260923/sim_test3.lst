@@ -1,0 +1,70 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test3.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; t                                      
+   4 start:                                   
+   5 b negative_word                          
+   6 t jump1 ; should jump to jump1           
+   7 z 0 ; should not stop here               
+   8 jump1:                                   
+   9 b positive_word                          
+  10 t jump2 ; should not jump                
+  11 z 0 ; should stop here with positive wor 
+  12 jump2:                                   
+  13 b funny_pattern ; indicates something we 
+  14 z 0 ; should not stop here               
+  15 .locn 1234                               locn = 1234
+  16 negative_word:                           
+  17 .atq -0.5 0                              
+  18 positive_word:                           
+  19 .atq 6 3                                 
+  20 funny_pattern:                           
+  21 .word 0xf0f0f0f0                         
+  22 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+jump1        :            3
+jump2        :            6
+negative_word :         1234
+positive_word :         1235
+funny_pattern :         1236
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test3.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; t                                      
+   4 start:                                   
+   5 b negative_word                             0 b      1234 19 18        70472 0001 1348 0001 1348
+   6 t jump1 ; should jump to jump1              1 t         3  0  3       720908 000g 000j 000b 000c
+   7 z 0 ; should not stop here                  2 z         0  0  0            0 0000 0000 0000 0000
+   8 jump1:                                   
+   9 b positive_word                             3 b      1235 19 19        70476 0001 134j 0001 134c
+  10 t jump2 ; should not jump                   4 t         6  0  6       720920 000g 0018 000b 0018
+  11 z 0 ; should stop here with positive wor    5 z         0  0  0            0 0000 0000 0000 0000
+  12 jump2:                                   
+  13 b funny_pattern ; indicates something we    6 b      1236 19 20        70480 0001 1350 0001 1350
+  14 z 0 ; should not stop here                  7 z         0  0  0            0 0000 0000 0000 0000
+  15 .locn 1234                               locn = 1234
+  16 negative_word:                           
+  17 .atq -0.5 0                              1234                     3221225472 j000 0000 c000 0000
+  18 positive_word:                           
+  19 .atq 6 3                                 1235                     1610612736 6000 0000 6000 0000
+  20 funny_pattern:                           
+  21 .word 0xf0f0f0f0                         1236                     4042322160 w0w0 w0w0 f0f0 f0f0
+  22 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+jump1        :            3
+jump2        :            6
+negative_word :         1234
+positive_word :         1235
+funny_pattern :         1236

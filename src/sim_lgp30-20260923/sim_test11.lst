@@ -1,0 +1,86 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test11.py                          
+   2 ; testing printing of case, colour, back 
+   3 ;                                        
+   4 .locn 1111      ; any old start address  locn = 1111
+   5 start:      ; assumed black              
+   6 .pchar #l   ; lower case                 
+   7 .pchar a    ; a                          
+   8 .pchar b    ; b                          
+   9 .pchar c    ; c                          
+  10 .pchar #u   ; upper case                 
+  11 .pchar a    ; A                          
+  12 .pchar b    ; B                          
+  13 .pchar c    ; C                          
+  14 .pchar #l   ; lower case                 
+  15 .pchar #c   ; assumed red                
+  16 .pchar a    ; a                          
+  17 .pchar b    ; b                          
+  18 .pchar c    ; c                          
+  19 .pchar #u   ; upper case                 
+  20 .pchar a    ; A                          
+  21 .pchar b    ; B                          
+  22 .pchar c    ; C                          
+  23 .pchar #c   ; assumed black              
+  24 .pchar #l   ; lower chase                
+  25 .pchar a    ; a                          
+  26 .pchar b    ; b                          
+  27 .pchar c    ; c                          
+  28 .pchar #u   ; upper case                 
+  29 .pchar a    ; A                          
+  30 .pchar b    ; B                          
+  31 .pchar c    ; C                          
+  32 .pchar #b   ; back 1                     
+  33 .pchar #b   ; back 2                     
+  34 .pchar #b   ; back 3                     
+  35 .end start                               
+
+Symbol Table:
+------ ------
+start        :         1111
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test11.py                          
+   2 ; testing printing of case, colour, back 
+   3 ;                                        
+   4 .locn 1111      ; any old start address  locn = 1111
+   5 start:      ; assumed black              
+   6 .pchar #l   ; lower case                 1111 .pchar  256  4  0       525312 0008 0400 0008 0400
+   7 .pchar a    ; a                          1112 .pchar 3648 57  0       538880 0008 3900 0008 3900
+   8 .pchar b    ; b                          1113 .pchar  320  5  0       525568 0008 0500 0008 0500
+   9 .pchar c    ; c                          1114 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  10 .pchar #u   ; upper case                 1115 .pchar  512  8  0       526336 0008 0800 0008 0800
+  11 .pchar a    ; A                          1116 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  12 .pchar b    ; B                          1117 .pchar  320  5  0       525568 0008 0500 0008 0500
+  13 .pchar c    ; C                          1118 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  14 .pchar #l   ; lower case                 1119 .pchar  256  4  0       525312 0008 0400 0008 0400
+  15 .pchar #c   ; assumed red                1120 .pchar  768 12  0       527360 0008 0j00 0008 0c00
+  16 .pchar a    ; a                          1121 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  17 .pchar b    ; b                          1122 .pchar  320  5  0       525568 0008 0500 0008 0500
+  18 .pchar c    ; c                          1123 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  19 .pchar #u   ; upper case                 1124 .pchar  512  8  0       526336 0008 0800 0008 0800
+  20 .pchar a    ; A                          1125 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  21 .pchar b    ; B                          1126 .pchar  320  5  0       525568 0008 0500 0008 0500
+  22 .pchar c    ; C                          1127 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  23 .pchar #c   ; assumed black              1128 .pchar  768 12  0       527360 0008 0j00 0008 0c00
+  24 .pchar #l   ; lower chase                1129 .pchar  256  4  0       525312 0008 0400 0008 0400
+  25 .pchar a    ; a                          1130 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  26 .pchar b    ; b                          1131 .pchar  320  5  0       525568 0008 0500 0008 0500
+  27 .pchar c    ; c                          1132 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  28 .pchar #u   ; upper case                 1133 .pchar  512  8  0       526336 0008 0800 0008 0800
+  29 .pchar a    ; A                          1134 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  30 .pchar b    ; B                          1135 .pchar  320  5  0       525568 0008 0500 0008 0500
+  31 .pchar c    ; C                          1136 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  32 .pchar #b   ; back 1                     1137 .pchar 1280 20  0       529408 0008 1400 0008 1400
+  33 .pchar #b   ; back 2                     1138 .pchar 1280 20  0       529408 0008 1400 0008 1400
+  34 .pchar #b   ; back 3                     1139 .pchar 1280 20  0       529408 0008 1400 0008 1400
+  35 .end start                               Start: 1111
+
+Symbol Table:
+------ ------
+start        :         1111

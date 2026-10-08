@@ -1,0 +1,58 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test2.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; r, u, z, t                             
+   4 start:                                   
+   5 b word1 ; initialise A/ac with a recogni 
+   6 r subend ; patch the return instruction  
+   7 u subroutine ; jump to subroutine        
+   8 z 0 ; stop                               
+   9 .locn 1000                               locn = 1000
+  10 subroutine:                              
+  11 b word2 ; set A/ac to a different recogn 
+  12 subend:                                  
+  13 u 0 ; patched instruction will return to 
+  14 .locn 1100                               locn = 1100
+  15 word1: .word 0xf0f0f0f0 ; pattern 1      
+  16 word2: .word 0x0f0f0f0f ; pattern 2      
+  17 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+subroutine   :         1000
+subend       :         1001
+word1        :         1100
+word2        :         1101
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test2.asm                          
+   2 ; test non-arithmetic instructions       
+   3 ; r, u, z, t                             
+   4 start:                                   
+   5 b word1 ; initialise A/ac with a recogni    0 b      1100 17 12        69936 0001 1130 0001 1130
+   6 r subend ; patch the return instruction     1 r      1001 15 41       200612 0003 0wf4 0003 0fa4
+   7 u subroutine ; jump to subroutine           2 u      1000 15 40       659360 000f 0wf0 000a 0fa0
+   8 z 0 ; stop                                  3 z         0  0  0            0 0000 0000 0000 0000
+   9 .locn 1000                               locn = 1000
+  10 subroutine:                              
+  11 b word2 ; set A/ac to a different recogn 1000 b      1101 17 13        69940 0001 1134 0001 1134
+  12 subend:                                  
+  13 u 0 ; patched instruction will return to 1001 u         0  0  0       655360 000f 0000 000a 0000
+  14 .locn 1100                               locn = 1100
+  15 word1: .word 0xf0f0f0f0 ; pattern 1      1100                     4042322160 w0w0 w0w0 f0f0 f0f0
+  16 word2: .word 0x0f0f0f0f ; pattern 2      1101                      252645134 0w0w 0w0q 0f0f 0f0e
+  17 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+subroutine   :         1000
+subend       :         1001
+word1        :         1100
+word2        :         1101

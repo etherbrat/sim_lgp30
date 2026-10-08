@@ -1,0 +1,106 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test0.asm                          
+   2 ; basic opcodes and constants            
+   3 ; do they comme in faithfully from the a 
+   4 ; check by examining memory contents     
+   5 b 0 ; 0x1                                
+   6 b lastmem ;                              
+   7 h 100 ; 0xc                              
+   8 c 200 ; 0xd                              
+   9 a 300 ; 0xe                              
+  10 s 400 ; 0xf                              
+  11 m 500 ; 0x7                              
+  12 n 600 ; 0x6                              
+  13 d 700 ; 0x5                              
+  14 e 800 ; 0x9                              
+  15 y 900 ; 0x2                              
+  16 r 1000 ; 0x3                             
+  17 u 1100 ; 0xa                             
+  18 t 1200 ; 0xd                             
+  19 z 0                                      
+  20 z 4                                      
+  21 z 8                                      
+  22 z 16                                     
+  23 z 32                                     
+  24 z 32+16+8+4                              
+  25 p 0 ; 0x8                                
+  26 p 1                                      
+  27 p 62                                     
+  28 p 63                                     
+  29 i 0 ; 0x4                                
+  30 .locn 1000                               locn = 1000
+  31 .word 0             ; unchanged          
+  32 .word 0xffffffff    ; LSB is set to zero 
+  33 .word 0xf0f0f0f0    ; unchanged          
+  34 .word 0x0f0f0f0f    ; LSB is set to zero 
+  35 .word 4294967295    ; lsb is set to zero 
+  36 .word 2147483647    ; largest 2's comple 
+  37 .word -2147483648   ; largest 2's comple 
+  38 .locn 2000                               locn = 2000
+  39 .atq 0.5 0          ; 0100 0000 0000 000 
+  40 .atq 0.5 29         ; 0000 0000 0000 000 
+  41 .atq -0.5 0         ; 1100 0000 0000 000 
+  42 .atq -0.5 29        ; 1111 1111 1111 111 
+  43 .locn 4095                               locn = 4095
+  44 lastmem: .word 0                         
+  45 .end 0                                   
+
+Symbol Table:
+------ ------
+lastmem      :         4095
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test0.asm                          
+   2 ; basic opcodes and constants            
+   3 ; do they comme in faithfully from the a 
+   4 ; check by examining memory contents     
+   5 b 0 ; 0x1                                   0 b         0  0  0        65536 0001 0000 0001 0000
+   6 b lastmem ;                                 1 b      4095 63 63        81916 0001 3wwj 0001 3ffc
+   7 h 100 ; 0xc                                 2 h       100  1 36       786832 000j 0190 000c 0190
+   8 c 200 ; 0xd                                 3 c       200  3  8       852768 000k 0320 000d 0320
+   9 a 300 ; 0xe                                 4 a       300  4 44       918704 000q 04g0 000e 04b0
+  10 s 400 ; 0xf                                 5 s       400  6 16       984640 000w 0640 000f 0640
+  11 m 500 ; 0x7                                 6 m       500  7 52       460752 0007 07k0 0007 07d0
+  12 n 600 ; 0x6                                 7 n       600  9 24       395616 0006 0960 0006 0960
+  13 d 700 ; 0x5                                 8 d       700 10 60       330480 0005 0fw0 0005 0af0
+  14 e 800 ; 0x9                                 9 e       800 12 32       593024 0009 0j80 0009 0c80
+  15 y 900 ; 0x2                                10 y       900 14  4       134672 0002 0q10 0002 0e10
+  16 r 1000 ; 0x3                               11 r      1000 15 40       200608 0003 0wf0 0003 0fa0
+  17 u 1100 ; 0xa                               12 u      1100 17 12       659760 000f 1130 000a 1130
+  18 t 1200 ; 0xd                               13 t      1200 18 48       725696 000g 12j0 000b 12c0
+  19 z 0                                        14 z         0  0  0            0 0000 0000 0000 0000
+  20 z 4                                        15 z       256  4  0         1024 0000 0400 0000 0400
+  21 z 8                                        16 z       512  8  0         2048 0000 0800 0000 0800
+  22 z 16                                       17 z      1024 16  0         4096 0000 1000 0000 1000
+  23 z 32                                       18 z      2048 32  0         8192 0000 2000 0000 2000
+  24 z 32+16+8+4                                19 z      3840 60  0        15360 0000 3j00 0000 3c00
+  25 p 0 ; 0x8                                  20 p         0  0  0       524288 0008 0000 0008 0000
+  26 p 1                                        21 p        64  1  0       524544 0008 0100 0008 0100
+  27 p 62                                       22 p      3968 62  0       540160 0008 3q00 0008 3e00
+  28 p 63                                       23 p      4032 63  0       540416 0008 3w00 0008 3f00
+  29 i 0 ; 0x4                                  24 i         0  0  0       262144 0004 0000 0004 0000
+  30 .locn 1000                               locn = 1000
+  31 .word 0             ; unchanged          1000                              0 0000 0000 0000 0000
+  32 .word 0xffffffff    ; LSB is set to zero 1001                     4294967294 wwww wwwq ffff fffe
+  33 .word 0xf0f0f0f0    ; unchanged          1002                     4042322160 w0w0 w0w0 f0f0 f0f0
+  34 .word 0x0f0f0f0f    ; LSB is set to zero 1003                      252645134 0w0w 0w0q 0f0f 0f0e
+  35 .word 4294967295    ; lsb is set to zero 1004                     4294967294 wwww wwwq ffff fffe
+  36 .word 2147483647    ; largest 2's comple 1005                     2147483646 7www wwwq 7fff fffe
+  37 .word -2147483648   ; largest 2's comple 1006                     2147483648 8000 0000 8000 0000
+  38 .locn 2000                               locn = 2000
+  39 .atq 0.5 0          ; 0100 0000 0000 000 2000                     1073741824 4000 0000 4000 0000
+  40 .atq 0.5 29         ; 0000 0000 0000 000 2001                              2 0000 0002 0000 0002
+  41 .atq -0.5 0         ; 1100 0000 0000 000 2002                     3221225472 j000 0000 c000 0000
+  42 .atq -0.5 29        ; 1111 1111 1111 111 2003                     4294967294 wwww wwwq ffff fffe
+  43 .locn 4095                               locn = 4095
+  44 lastmem: .word 0                         4095                              0 0000 0000 0000 0000
+  45 .end 0                                   Start: 0
+
+Symbol Table:
+------ ------
+lastmem      :         4095

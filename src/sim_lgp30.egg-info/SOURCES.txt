@@ -1,0 +1,9 @@
+pyproject.toml
+src/sim_lgp30/drumtest.py
+src/sim_lgp30/lgp30_cpu.py
+src/sim_lgp30/lgp30_drum.py
+src/sim_lgp30/simulator.py
+src/sim_lgp30.egg-info/PKG-INFO
+src/sim_lgp30.egg-info/SOURCES.txt
+src/sim_lgp30.egg-info/dependency_links.txt
+src/sim_lgp30.egg-info/top_level.txt

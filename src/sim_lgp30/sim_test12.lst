@@ -1,0 +1,38 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test12.asm                         
+   2 ; extensive tests of the z instruction   
+   3 ; run multiple times with different swit 
+   4 .locn 500                                locn =  500
+   5 start:                                   
+   6 z 32 ; should continue with switch 32 (a 
+   7 z 16 ; should continue with switch 16 (a 
+   8 z 8 ; should continue with switch 8 (and 
+   9 z 4 ; should continue with switch 4 (and 
+  10 z 0 ; should halt                        
+  11 .end start                               
+
+Symbol Table:
+------ ------
+start        :          500
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test12.asm                         
+   2 ; extensive tests of the z instruction   
+   3 ; run multiple times with different swit 
+   4 .locn 500                                locn =  500
+   5 start:                                   
+   6 z 32 ; should continue with switch 32 (a  500 z      2048 32  0         8192 0000 2000 0000 2000
+   7 z 16 ; should continue with switch 16 (a  501 z      1024 16  0         4096 0000 1000 0000 1000
+   8 z 8 ; should continue with switch 8 (and  502 z       512  8  0         2048 0000 0800 0000 0800
+   9 z 4 ; should continue with switch 4 (and  503 z       256  4  0         1024 0000 0400 0000 0400
+  10 z 0 ; should halt                         504 z         0  0  0            0 0000 0000 0000 0000
+  11 .end start                               Start: 500
+
+Symbol Table:
+------ ------
+start        :          500

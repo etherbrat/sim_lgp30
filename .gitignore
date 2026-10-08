@@ -1,0 +1,6 @@
+.vscode/
+build/
+docs/*.docx
+venv/
+run_thonny.py
+simulator.spec

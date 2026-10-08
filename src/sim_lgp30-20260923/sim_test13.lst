@@ -1,0 +1,100 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test13.asm                         
+   2 ; test printing tabs                     
+   3 ; re-run with varying tab stops          
+   4 ;                                        
+   5 .locn 111 ; any old address              locn =  111
+   6 start:                                   
+   7 .pchar a                                 
+   8 .pchar #t                                
+   9 .pchar b                                 
+  10 .pchar #t                                
+  11 .pchar c                                 
+  12 .pchar #t                                
+  13 .pchar d                                 
+  14 .pchar #t                                
+  15 .pchar e                                 
+  16 .pchar #t                                
+  17 .pchar f                                 
+  18 .pchar #t                                
+  19 .pchar g                                 
+  20 .pchar #t                                
+  21 .pchar h                                 
+  22 .pchar #t                                
+  23 .pchar j                                 
+  24 .pchar #n                                
+  25 .pchar a                                 
+  26 .pchar #t                                
+  27 .pchar b                                 
+  28 .pchar #t                                
+  29 .pchar #t                                
+  30 .pchar c                                 
+  31 .pchar #t                                
+  32 .pchar #t                                
+  33 .pchar #t                                
+  34 .pchar d                                 
+  35 .pchar e                                 
+  36 .pchar f                                 
+  37 .pchar g                                 
+  38 .pchar h                                 
+  39 .pchar j                                 
+  40 .pchar #n                                
+  41 z 0                                      
+  42 .end start                               
+
+Symbol Table:
+------ ------
+start        :          111
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test13.asm                         
+   2 ; test printing tabs                     
+   3 ; re-run with varying tab stops          
+   4 ;                                        
+   5 .locn 111 ; any old address              locn =  111
+   6 start:                                   
+   7 .pchar a                                  111 .pchar 3648 57  0       538880 0008 3900 0008 3900
+   8 .pchar #t                                 112 .pchar 1536 24  0       530432 0008 1800 0008 1800
+   9 .pchar b                                  113 .pchar  320  5  0       525568 0008 0500 0008 0500
+  10 .pchar #t                                 114 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  11 .pchar c                                  115 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  12 .pchar #t                                 116 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  13 .pchar d                                  117 .pchar 1344 21  0       529664 0008 1500 0008 1500
+  14 .pchar #t                                 118 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  15 .pchar e                                  119 .pchar 2368 37  0       533760 0008 2500 0008 2500
+  16 .pchar #t                                 120 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  17 .pchar f                                  121 .pchar 2688 42  0       535040 0008 2f00 0008 2a00
+  18 .pchar #t                                 122 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  19 .pchar g                                  123 .pchar 2944 46  0       536064 0008 2q00 0008 2e00
+  20 .pchar #t                                 124 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  21 .pchar h                                  125 .pchar 3136 49  0       536832 0008 3100 0008 3100
+  22 .pchar #t                                 126 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  23 .pchar j                                  127 .pchar 3200 50  0       537088 0008 3200 0008 3200
+  24 .pchar #n                                 128 .pchar 1024 16  0       528384 0008 1000 0008 1000
+  25 .pchar a                                  129 .pchar 3648 57  0       538880 0008 3900 0008 3900
+  26 .pchar #t                                 130 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  27 .pchar b                                  131 .pchar  320  5  0       525568 0008 0500 0008 0500
+  28 .pchar #t                                 132 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  29 .pchar #t                                 133 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  30 .pchar c                                  134 .pchar 3392 53  0       537856 0008 3500 0008 3500
+  31 .pchar #t                                 135 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  32 .pchar #t                                 136 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  33 .pchar #t                                 137 .pchar 1536 24  0       530432 0008 1800 0008 1800
+  34 .pchar d                                  138 .pchar 1344 21  0       529664 0008 1500 0008 1500
+  35 .pchar e                                  139 .pchar 2368 37  0       533760 0008 2500 0008 2500
+  36 .pchar f                                  140 .pchar 2688 42  0       535040 0008 2f00 0008 2a00
+  37 .pchar g                                  141 .pchar 2944 46  0       536064 0008 2q00 0008 2e00
+  38 .pchar h                                  142 .pchar 3136 49  0       536832 0008 3100 0008 3100
+  39 .pchar j                                  143 .pchar 3200 50  0       537088 0008 3200 0008 3200
+  40 .pchar #n                                 144 .pchar 1024 16  0       528384 0008 1000 0008 1000
+  41 z 0                                       145 z         0  0  0            0 0000 0000 0000 0000
+  42 .end start                               Start: 111
+
+Symbol Table:
+------ ------
+start        :          111

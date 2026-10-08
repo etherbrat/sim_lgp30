@@ -1,0 +1,98 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test9.asm                          
+   2 ; test arithmetic instructions           
+   3 ; d                                      
+   4 start:                                   
+   5 b val1 ; get value                       
+   6 d val3 ; pos / pos ; 0.52630457 at q=0   
+   7 h out1 ; store for evaluation            
+   8 b val2 ; get value                       
+   9 d val3 ; neg / pos                       
+  10 h out1                                   
+  11 b val1 ; get value                       
+  12 d val4 ; pos / neg                       
+  13 h out1                                   
+  14 b val2 ; get value                       
+  15 d val4 ; neg / neg                       
+  16 h out1                                   
+  17 b val3 ; get value                       
+  18 d val1 ; pos / pos - should overflow     
+  19 b val3 ; get value                       
+  20 d val2 ; pos / neg - should overflow     
+  21 b val4 ; get value                       
+  22 d val1 ; neg / pos - shold overflow      
+  23 b val4 ; get value                       
+  24 d val2 ; neg / neg - should overflow     
+  25 z 0                                      
+  26 ;                                        
+  27 .locn 2000                               locn = 2000
+  28 val1: .atq 12345 18                      
+  29 val2: .atq -12348 18                     
+  30 val3: .atq 23456 18                      
+  31 val4: .atq -23456 18                     
+  32 ;                                        
+  33 .locn 3000                               locn = 3000
+  34 out1: .word 0                            
+  35 ;                                        
+  36 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+out1         :         3000
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test9.asm                          
+   2 ; test arithmetic instructions           
+   3 ; d                                      
+   4 start:                                   
+   5 b val1 ; get value                          0 b      2000 31 16        73536 0001 1w40 0001 1f40
+   6 d val3 ; pos / pos ; 0.52630457 at q=0      1 d      2002 31 18       335688 0005 1w48 0005 1f48
+   7 h out1 ; store for evaluation               2 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+   8 b val2 ; get value                          3 b      2001 31 17        73540 0001 1w44 0001 1f44
+   9 d val3 ; neg / pos                          4 d      2002 31 18       335688 0005 1w48 0005 1f48
+  10 h out1                                      5 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  11 b val1 ; get value                          6 b      2000 31 16        73536 0001 1w40 0001 1f40
+  12 d val4 ; pos / neg                          7 d      2003 31 19       335692 0005 1w4j 0005 1f4c
+  13 h out1                                      8 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  14 b val2 ; get value                          9 b      2001 31 17        73540 0001 1w44 0001 1f44
+  15 d val4 ; neg / neg                         10 d      2003 31 19       335692 0005 1w4j 0005 1f4c
+  16 h out1                                     11 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  17 b val3 ; get value                         12 b      2002 31 18        73544 0001 1w48 0001 1f48
+  18 d val1 ; pos / pos - should overflow       13 d      2000 31 16       335680 0005 1w40 0005 1f40
+  19 b val3 ; get value                         14 b      2002 31 18        73544 0001 1w48 0001 1f48
+  20 d val2 ; pos / neg - should overflow       15 d      2001 31 17       335684 0005 1w44 0005 1f44
+  21 b val4 ; get value                         16 b      2003 31 19        73548 0001 1w4j 0001 1f4c
+  22 d val1 ; neg / pos - shold overflow        17 d      2000 31 16       335680 0005 1w40 0005 1f40
+  23 b val4 ; get value                         18 b      2003 31 19        73548 0001 1w4j 0001 1f4c
+  24 d val2 ; neg / neg - should overflow       19 d      2001 31 17       335684 0005 1w44 0005 1f44
+  25 z 0                                        20 z         0  0  0            0 0000 0000 0000 0000
+  26 ;                                        
+  27 .locn 2000                               locn = 2000
+  28 val1: .atq 12345 18                      2000                      101130240 0607 2000 0607 2000
+  29 val2: .atq -12348 18                     2001                     4193812480 w9w8 8000 f9f8 8000
+  30 val3: .atq 23456 18                      2002                      192151552 0g74 0000 0b74 0000
+  31 val4: .atq -23456 18                     2003                     4102815744 w48j 0000 f48c 0000
+  32 ;                                        
+  33 .locn 3000                               locn = 3000
+  34 out1: .word 0                            3000                              0 0000 0000 0000 0000
+  35 ;                                        
+  36 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+out1         :         3000

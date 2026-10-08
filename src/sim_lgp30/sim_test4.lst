@@ -1,0 +1,134 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test4.asm                          
+   2 ; test arithmetic instructions           
+   3 ; a                                      
+   4 start:                                   
+   5 b val1 ; get a value                     
+   6 a val2 ; a simple addition               
+   7 h out1 ; 80 at q = 7                     
+   8 b val1 ; get a value                     
+   9 a val3 ; another simple addition         
+  10 h out1 ; -6 at q = 7                     
+  11 b val4 ; get a value                     
+  12 a val4 ; 0.5 + 0.5 - should overflow - * 
+  13 b val5 ; get a value                     
+  14 a val5 ; -0.5 + -0.5 - should overflow - 
+  15 b val5 ; get a value                     
+  16 a val6 ; -0.5 + -0.500001 - should overf 
+  17 b val7 ; get a value                     
+  18 a val8 ; 0.999999 + 0.000001 - should ov 
+  19 b val7 ; get a value                     
+  20 a val9 ; 0.999999 + 0.0000011 - should o 
+  21 b val10 ; get a value                    
+  22 a val11 ; -0.999999 + -0.000001 - should 
+  23 b val10 ; get a value                    
+  24 a val12 ; -0.999999 + -0.0000011 - shoul 
+  25 z 0                                      
+  26                                          
+  27 .locn 2000                               locn = 2000
+  28 val1: .atq 37 7                          
+  29 val2: .atq 43 7                          
+  30 val3: .atq -43 7                         
+  31 val4: .atq 0.5 0                         
+  32 val5: .atq -0.5 0                        
+  33 val6: .atq -0.500001 0 ; should tip into 
+  34 val7: .atq 0.999999 0  ; close to overfl 
+  35 val8: .atq 0.000001 0  ; should tip into 
+  36 val9: .atq 0.0000011 0 ; should tip into 
+  37 val10: .atq -0.999999 0 ; close to overf 
+  38 val11: .atq -0.000001 0 ; should tip int 
+  39 val12: .atq -0.0000011 0 ; should tip in 
+  40                                          
+  41 .locn 3000                               locn = 3000
+  42 out1: .word 0                            
+  43 out2: .word 0                            
+  44                                          
+  45 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+val5         :         2004
+val6         :         2005
+val7         :         2006
+val8         :         2007
+val9         :         2008
+val10        :         2009
+val11        :         2010
+val12        :         2011
+out1         :         3000
+out2         :         3001
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test4.asm                          
+   2 ; test arithmetic instructions           
+   3 ; a                                      
+   4 start:                                   
+   5 b val1 ; get a value                        0 b      2000 31 16        73536 0001 1w40 0001 1f40
+   6 a val2 ; a simple addition                  1 a      2001 31 17       925508 000q 1w44 000e 1f44
+   7 h out1 ; 80 at q = 7                        2 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+   8 b val1 ; get a value                        3 b      2000 31 16        73536 0001 1w40 0001 1f40
+   9 a val3 ; another simple addition            4 a      2002 31 18       925512 000q 1w48 000e 1f48
+  10 h out1 ; -6 at q = 7                        5 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  11 b val4 ; get a value                        6 b      2003 31 19        73548 0001 1w4j 0001 1f4c
+  12 a val4 ; 0.5 + 0.5 - should overflow - *    7 a      2003 31 19       925516 000q 1w4j 000e 1f4c
+  13 b val5 ; get a value                        8 b      2004 31 20        73552 0001 1w50 0001 1f50
+  14 a val5 ; -0.5 + -0.5 - should overflow -    9 a      2004 31 20       925520 000q 1w50 000e 1f50
+  15 b val5 ; get a value                       10 b      2004 31 20        73552 0001 1w50 0001 1f50
+  16 a val6 ; -0.5 + -0.500001 - should overf   11 a      2005 31 21       925524 000q 1w54 000e 1f54
+  17 b val7 ; get a value                       12 b      2006 31 22        73560 0001 1w58 0001 1f58
+  18 a val8 ; 0.999999 + 0.000001 - should ov   13 a      2007 31 23       925532 000q 1w5j 000e 1f5c
+  19 b val7 ; get a value                       14 b      2006 31 22        73560 0001 1w58 0001 1f58
+  20 a val9 ; 0.999999 + 0.0000011 - should o   15 a      2008 31 24       925536 000q 1w60 000e 1f60
+  21 b val10 ; get a value                      16 b      2009 31 25        73572 0001 1w64 0001 1f64
+  22 a val11 ; -0.999999 + -0.000001 - should   17 a      2010 31 26       925544 000q 1w68 000e 1f68
+  23 b val10 ; get a value                      18 b      2009 31 25        73572 0001 1w64 0001 1f64
+  24 a val12 ; -0.999999 + -0.0000011 - shoul   19 a      2011 31 27       925548 000q 1w6j 000e 1f6c
+  25 z 0                                        20 z         0  0  0            0 0000 0000 0000 0000
+  26                                          
+  27 .locn 2000                               locn = 2000
+  28 val1: .atq 37 7                          2000                      620756992 2500 0000 2500 0000
+  29 val2: .atq 43 7                          2001                      721420288 2g00 0000 2b00 0000
+  30 val3: .atq -43 7                         2002                     3573547008 k500 0000 d500 0000
+  31 val4: .atq 0.5 0                         2003                     1073741824 4000 0000 4000 0000
+  32 val5: .atq -0.5 0                        2004                     3221225472 j000 0000 c000 0000
+  33 val6: .atq -0.500001 0 ; should tip into 2005                     3221223324 gwww w79j bfff f79c
+  34 val7: .atq 0.999999 0  ; close to overfl 2006                     2147481500 7www w79j 7fff f79c
+  35 val8: .atq 0.000001 0  ; should tip into 2007                           2146 0000 0862 0000 0862
+  36 val9: .atq 0.0000011 0 ; should tip into 2008                           2362 0000 093f 0000 093a
+  37 val10: .atq -0.999999 0 ; close to overf 2009                     2147485796 8000 0864 8000 0864
+  38 val11: .atq -0.000001 0 ; should tip int 2010                     4294965148 wwww w79j ffff f79c
+  39 val12: .atq -0.0000011 0 ; should tip in 2011                     4294964934 wwww w6j6 ffff f6c6
+  40                                          
+  41 .locn 3000                               locn = 3000
+  42 out1: .word 0                            3000                              0 0000 0000 0000 0000
+  43 out2: .word 0                            3001                              0 0000 0000 0000 0000
+  44                                          
+  45 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+val5         :         2004
+val6         :         2005
+val7         :         2006
+val8         :         2007
+val9         :         2008
+val10        :         2009
+val11        :         2010
+val12        :         2011
+out1         :         3000
+out2         :         3001

@@ -1,0 +1,90 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test6.asm                          
+   2 ; test eatqexam command (synthetic)      
+   3 start:                                   
+   4 b bottom1 ; get the bottom half into A/a 
+   5 b bottom2 ; get the bottom half into A/a 
+   6 b bottom3 ; get the bottom half into A/a 
+   7 z 0                                      
+   8 ;                                        
+   9 .locn 1000                               locn = 1000
+  10 top1:                                    
+  11 .word 0b00000000000000000000000000000000 
+  12 bottom1:                                 
+  13 .word 0b00000000000000000000000000000100 
+  14 ; concetenated 62-bit value is           
+  15 ; 0b000000000000000000000000000000000000 
+  16 ;                                        
+  17 top2:                                    
+  18 .word 0b00000000000000000000001010111100 
+  19 bottom2:                                 
+  20 .word 0b00011000000000000000000000000000 
+  21 ; concatenated 62-bit value is           
+  22 ; 0b000000000000000000000010101111000011 
+  23 ;                                        
+  24 top3:                                    
+  25 .word 0b11111111111111111111111111110010 
+  26 bottom3:                                 
+  27 .word 0b10000000000000000000000000000000 
+  28 ; concatenated 62-bit value is           
+  29 ; 0b111111111111111111111111111100110000 
+  30 ;                                        
+  31 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+top1         :         1000
+bottom1      :         1001
+top2         :         1002
+bottom2      :         1003
+top3         :         1004
+bottom3      :         1005
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test6.asm                          
+   2 ; test eatqexam command (synthetic)      
+   3 start:                                   
+   4 b bottom1 ; get the bottom half into A/a    0 b      1001 15 41        69540 0001 0wf4 0001 0fa4
+   5 b bottom2 ; get the bottom half into A/a    1 b      1003 15 43        69548 0001 0wfj 0001 0fac
+   6 b bottom3 ; get the bottom half into A/a    2 b      1005 15 45        69556 0001 0wg4 0001 0fb4
+   7 z 0                                         3 z         0  0  0            0 0000 0000 0000 0000
+   8 ;                                        
+   9 .locn 1000                               locn = 1000
+  10 top1:                                    
+  11 .word 0b00000000000000000000000000000000 1000                              0 0000 0000 0000 0000
+  12 bottom1:                                 
+  13 .word 0b00000000000000000000000000000100 1001                              4 0000 0004 0000 0004
+  14 ; concetenated 62-bit value is           
+  15 ; 0b000000000000000000000000000000000000 
+  16 ;                                        
+  17 top2:                                    
+  18 .word 0b00000000000000000000001010111100 1002                            700 0000 02gj 0000 02bc
+  19 bottom2:                                 
+  20 .word 0b00011000000000000000000000000000 1003                      402653184 1800 0000 1800 0000
+  21 ; concatenated 62-bit value is           
+  22 ; 0b000000000000000000000010101111000011 
+  23 ;                                        
+  24 top3:                                    
+  25 .word 0b11111111111111111111111111110010 1004                     4294967282 wwww www2 ffff fff2
+  26 bottom3:                                 
+  27 .word 0b10000000000000000000000000000000 1005                     2147483648 8000 0000 8000 0000
+  28 ; concatenated 62-bit value is           
+  29 ; 0b111111111111111111111111111100110000 
+  30 ;                                        
+  31 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+top1         :         1000
+bottom1      :         1001
+top2         :         1002
+bottom2      :         1003
+top3         :         1004
+bottom3      :         1005

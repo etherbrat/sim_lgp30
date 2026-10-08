@@ -1,0 +1,94 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test8.asm                          
+   2 ; test arithmetic instructions           
+   3 ; n                                      
+   4 start:                                   
+   5 ; n multiply                             
+   6 b val1 ; get a value                     
+   7 n val2 ; shift                           
+   8 h out1 ; 12345 at q = 14                 
+   9 b val3 ; get a value                     
+  10 m val4 ; m multiply                      
+  11 h out1 ; top of 7006652 at q = 42        
+  12 b val3 ; get again                       
+  13 n val4 ; bottom of 7006652 at q = 42 - e 
+  14 b val5 ; get a value                     
+  15 m val6 ; m multiply                      
+  16 h out1 ; top of -0.00053646432 at q=35   
+  17 b val5 ; get again                       
+  18 n val6 ; bottom of -0.00053646432 at q=3 
+  19 z 0                                      
+  20 ;                                        
+  21 .locn 2000                               locn = 2000
+  22 val1: .atq 12345 18                      
+  23 val2: .lshn 4 ; right shift 4 places     
+  24 val3: .atq 1234 20                       
+  25 val4: .atq 5678 22                       
+  26 val5: .atq -0.009876 17                  
+  27 val6: .atq 0.05432 18                    
+  28 ;                                        
+  29 .locn 3000                               locn = 3000
+  30 out1: .word 0                            
+  31 ;                                        
+  32 .end start                               
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+val5         :         2004
+val6         :         2005
+out1         :         3000
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test8.asm                          
+   2 ; test arithmetic instructions           
+   3 ; n                                      
+   4 start:                                   
+   5 ; n multiply                             
+   6 b val1 ; get a value                        0 b      2000 31 16        73536 0001 1w40 0001 1f40
+   7 n val2 ; shift                              1 n      2001 31 17       401220 0006 1w44 0006 1f44
+   8 h out1 ; 12345 at q = 14                    2 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+   9 b val3 ; get a value                        3 b      2002 31 18        73544 0001 1w48 0001 1f48
+  10 m val4 ; m multiply                         4 m      2003 31 19       466764 0007 1w4j 0007 1f4c
+  11 h out1 ; top of 7006652 at q = 42           5 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  12 b val3 ; get again                          6 b      2002 31 18        73544 0001 1w48 0001 1f48
+  13 n val4 ; bottom of 7006652 at q = 42 - e    7 n      2003 31 19       401228 0006 1w4j 0006 1f4c
+  14 b val5 ; get a value                        8 b      2004 31 20        73552 0001 1w50 0001 1f50
+  15 m val6 ; m multiply                         9 m      2005 31 21       466772 0007 1w54 0007 1f54
+  16 h out1 ; top of -0.00053646432 at q=35     10 h      3000 46 56       798432 000j 2qq0 000c 2ee0
+  17 b val5 ; get again                         11 b      2004 31 20        73552 0001 1w50 0001 1f50
+  18 n val6 ; bottom of -0.00053646432 at q=3   12 n      2005 31 21       401236 0006 1w54 0006 1f54
+  19 z 0                                        13 z         0  0  0            0 0000 0000 0000 0000
+  20 ;                                        
+  21 .locn 2000                               locn = 2000
+  22 val1: .atq 12345 18                      2000                      101130240 0607 2000 0607 2000
+  23 val2: .lshn 4 ; right shift 4 places     2001                             16 0000 0010 0000 0010
+  24 val3: .atq 1234 20                       2002                        2527232 0026 9000 0026 9000
+  25 val4: .atq 5678 22                       2003                        2907136 002j 5j00 002c 5c00
+  26 val5: .atq -0.009876 17                  2004                     4294967134 wwww ww5q ffff ff5e
+  27 val6: .atq 0.05432 18                    2005                            444 0000 01gj 0000 01bc
+  28 ;                                        
+  29 .locn 3000                               locn = 3000
+  30 out1: .word 0                            3000                              0 0000 0000 0000 0000
+  31 ;                                        
+  32 .end start                               Start: 0
+
+Symbol Table:
+------ ------
+start        :            0
+val1         :         2000
+val2         :         2001
+val3         :         2002
+val4         :         2003
+val5         :         2004
+val6         :         2005
+out1         :         3000

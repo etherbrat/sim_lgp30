@@ -1,0 +1,36 @@
+
+Pass 1
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test14.asm                         
+   2 ; test i instruction in step and run mod 
+   3 ;                                        
+   4 .locn 1234  ; any old start address      locn = 1234
+   5 start:                                   
+   6 p 0         ; set things in motion       
+   7 i 0         ; see what comes in          
+   8 .pchar *    ; indicate                   
+   9 u start     ; loop                       
+  10 .end start                               
+
+Symbol Table:
+------ ------
+start        :         1234
+
+Pass 2
+Line Statement                                Locn Opcode Addr  T  S          Dec Sex       Hex      
+---- ---------                                ---- ------ ----  -  -          --- ---       ---      
+   1 ; sim_test14.asm                         
+   2 ; test i instruction in step and run mod 
+   3 ;                                        
+   4 .locn 1234  ; any old start address      locn = 1234
+   5 start:                                   
+   6 p 0         ; set things in motion       1234 p         0  0  0       524288 0008 0000 0008 0000
+   7 i 0         ; see what comes in          1235 i         0  0  0       262144 0004 0000 0004 0000
+   8 .pchar *    ; indicate                   1236 .pchar  640 10  0       526848 0008 0f00 0008 0a00
+   9 u start     ; loop                       1237 u      1234 19 18       660296 000f 1348 000a 1348
+  10 .end start                               Start: 1234
+
+Symbol Table:
+------ ------
+start        :         1234
