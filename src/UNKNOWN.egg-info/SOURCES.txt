@@ -1,3 +1,4 @@
+README.md
 pyproject.toml
 src/UNKNOWN.egg-info/PKG-INFO
 src/UNKNOWN.egg-info/SOURCES.txt

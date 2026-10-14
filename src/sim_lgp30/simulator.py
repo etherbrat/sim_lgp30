@@ -1,7 +1,3 @@
-# Tidy up primary bootstrap and test/debug the bootstrap process
-# Check command line inputs
-# Repeat all tests
-# Check output
 # Try the floating point interpretive system
 # Implement v-loader export (?)
 
@@ -319,9 +315,14 @@ def dir_command(arg_list):
     # Args:
     # None
     current_dir = Path.cwd()
-    files = [item.name for item in current_dir.iterdir() if item.is_file()]
-    for file in files:
-        console.put_string(file)
+    items = [item.name for item in current_dir.iterdir() if item.is_dir()]
+    console.put_string("Directories")
+    for item in items:
+        console.put_string(f"  {item}")
+    items = [item.name for item in current_dir.iterdir() if item.is_file()]
+    console.put_string("Files")
+    for item in items:
+        console.put_string(f"  {item}")
     return True
 
 def eatqexamine_command(arg_list):
